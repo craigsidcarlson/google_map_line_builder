@@ -49,17 +49,22 @@ for(let i = 0; i < segments; i++) {
 Promise.all(promises)
 	.then(results => {
 		if(results) {
-			let response = [];
+			let data = [];
 			for(let i = 0; i < results.length; i++) {
-				let segment_data = results[i].data.results;
-				if(i > 0) segment_data = results[i].data.results.shift();
-				response = response.concat(segment_data);
+				let segment_data = [];
 
+				if(i > 0) {
+					// remove first data point as it was the last data point in the previous segment
+					results[i].data.results.shift();
+				}
+				segment_data = results[i].data.results;
+				let combined_data = data.concat(segment_data);
+				data = combined_data;
 			}
 			const time = Date.now();
 
 			const output = {
-				results: response,
+				results: data,
 				status: 'OK'
 			};
 
