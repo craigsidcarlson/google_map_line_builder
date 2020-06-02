@@ -1,10 +1,10 @@
-Stitch together google api map data along line
+Stitch together google api map data along line.
 
 To run, you will need NodeJs installed
 
 https://nodejs.org/en/download/
 
-Install dependencies
+To install dependencies, run the following command:
 
 `npm install`
 
@@ -12,7 +12,7 @@ All of the configurable parameters are at the top of the `google_map_builder.js`
 
 You will need a google api key. Place the api key in a file named `.env`
 
-A sample env file is provided `.env_sample` Simply rename it to `.env` and paste your api key after the equal sign without quotes.
+A sample env file is provided `.env_sample` Simply rename it to `.env` and paste your api key after the equals sign without quotes.
 
 Run `npm start` from the top most directory(the one with the `google_map_builder.js` file)
 
