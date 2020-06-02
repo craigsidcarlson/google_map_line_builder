@@ -4,7 +4,6 @@ const axios = require('axios');
 const fs = require('fs');
 require('dotenv').config();
 
-const file_prefix = 'roz_data';
 const api_key = process.env.google_api_key;
 
 if(!api_key) {
@@ -12,11 +11,19 @@ if(!api_key) {
 	return;
 }
 
+////////////////////////////////////////
+// Configurable Data
+////////////////////////////////////////
+const file_prefix = 'roz_data';
+
 const start_lat = 41.30;
 const start_long = -131.300;
 
 const end_lat = 39.10;
 const end_long = -131.30;
+
+const increments = 50; // meters
+////////////////////////////////////////
 
 //  Vincenty inverse formula for ellipsoids.
 const distance = getPreciseDistance({latitude: start_lat, longitude: start_long}, {latitude: end_lat, longitude: end_long});
@@ -25,7 +32,6 @@ const compass_direction = getRhumbLineBearing({latitude: start_lat, longitude: s
 console.log(`Distance ${distance}`);
 console.log(`Bearing ${compass_direction}`);
 
-const increments = 50; // meters
 const google_api_limit = 510;
 const segment_length = increments * google_api_limit; // meters
 
