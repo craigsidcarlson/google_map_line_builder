@@ -1,8 +1,12 @@
 {
-  "name": "roz_mapper",
+  "name": "google_map_line_builder",
   "version": "1.0.0",
   "description": "Stitch together google api map data along line",
   "main": "google_map_builder.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/craigsidcarlson/google_map_line_builder.git"
+  },
   "scripts": {
     "start": "node google_map_builder.js"
   },
