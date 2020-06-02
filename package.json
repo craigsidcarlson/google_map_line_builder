@@ -1,0 +1,17 @@
+{
+  "name": "roz_mapper",
+  "version": "1.0.0",
+  "description": "Stitch together google api map data along line",
+  "main": "google_map_builder.js",
+  "scripts": {
+    "start": "node google_map_builder.js"
+  },
+  "author": "Craig and Roz",
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^0.19.2",
+    "dotenv": "^8.2.0",
+    "fs": "0.0.1-security",
+    "geolib": "^3.3.1"
+  }
+}
