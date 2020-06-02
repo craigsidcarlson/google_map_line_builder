@@ -12,9 +12,9 @@ All of the configurable parameters are at the top of the `google_map_builder.js`
 
 You will need a google api key. Place the api key in a file named `.env`
 
-A sample env file is provided `.env_sample` Simply rename it to `.env` and paste your api key after the equals sign without quotes.
+A sample env file is provided `.env_sample` Simply rename it to `.env` and paste your api key after the equals sign, without quotes.
 
-Run `npm start` from the top most directory(the one with the `google_map_builder.js` file)
+Run `npm start` from the top most directory(the one with the `google_map_builder.js` file).
 
 The data is put into the data folder with your prefix of choice and a timestamp.
 
