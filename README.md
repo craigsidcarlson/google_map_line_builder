@@ -4,7 +4,7 @@ To run, you will need NodeJs installed
 
 https://nodejs.org/en/download/
 
-To install dependencies, run the following command:
+Download this repository then install dependencies by running the following command:
 
 `npm install`
 
