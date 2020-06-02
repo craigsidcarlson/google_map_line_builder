@@ -46,7 +46,7 @@ for(let i = 0; i < segments; i++) {
 	if(i === segments - 1) end = {latitude: end_lat, longitude: end_long};
 	else {
 		// computeDestinationPoint(point, distance, bearing, radius = earthRadius)
-		end = computeDestinationPoint({latitude: start.latitude, longitude: start_long}, segment_length, compass_direction);
+		end = computeDestinationPoint({latitude: start.latitude, longitude: start.longitude}, segment_length, compass_direction);
 	}
 	promises.push(callGoogleApi(start, end, google_api_limit));
 	start = end;
