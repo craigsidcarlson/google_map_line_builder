@@ -30,7 +30,7 @@ const google_api_limit = 510;
 const segment_length = increments * google_api_limit; // meters
 
 const segments = Math.ceil(distance / segment_length);
-console.log(`Stiching together ${segments} segments`);
+console.log(`Stitching together ${segments} segments`);
 
 const promises = [];
 let start = { latitude: start_lat, longitude: start_long };
