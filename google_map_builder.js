@@ -58,7 +58,12 @@ Promise.all(promises)
 			}
 			const time = Date.now();
 
-			fs.writeFile(`data/${file_prefix}_${time}.json`, JSON.stringify(response), function (err) {
+			const output = {
+				results: response,
+				status: 'OK'
+			};
+
+			fs.writeFile(`data/${file_prefix}_${time}.json`, JSON.stringify(output), function (err) {
 			  if (err) throw err;
 			  console.log('Saved!');
 			});
