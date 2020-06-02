@@ -8,7 +8,7 @@ const file_prefix = 'roz_data';
 const api_key = process.env.google_api_key;
 
 if(!api_key) {
-	console.log('Error! You need to put your google api key in. Read the Readme.md file for instructions');
+	console.log('Error! You need to put your google api key in the .env file. Read the Readme.md file for instructions');
 	return;
 }
 
