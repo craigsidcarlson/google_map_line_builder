@@ -26,12 +26,6 @@ const long_col = 1;
 
 const POLAR_RADIUS = 6356752 // meters
 const EQUATORIAL_RADIUS = 6378137 // meters
-
-const columns = {
-		lat: 'Lat',
-		long: 'Long',
-
-};
 ////////////////////////////////////////
 
 // Google has a rate limit of 10 requests per second per IP. This limits the outbound request to only go once every 100 milliseconds
@@ -60,9 +54,8 @@ readInterface.on('line', (line) => {
 readInterface.on('close', (line) => {
 	Promise.all(promises)
 	.then(results => {
-		console.log(`Processing promises`)
 		const time = Date.now();
-		fs.writeFile(`data/${file_prefix}_${time}.csv`, results, function (err) {
+		fs.writeFile(`data/${file_prefix}_${time}.csv`, results.join('\n'), function (err) {
 			if (err) throw err;
 			console.log('Saved!');
 		});
@@ -86,7 +79,6 @@ const getPointElevation = (lat, long) => {
 				const resolution = result.data.results[0].resolution;
 				const location = result.data.results[0].location;
 				const commaSeperated = `${location.lat},${location.lng},${elevation},${resolution}`;
-				console.log(commaSeperated);
 				return resolve(commaSeperated);
 			})
 			.catch(error => {

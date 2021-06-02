@@ -21,3 +21,5 @@ The data is put into the data folder with your prefix of choice and a timestamp.
 
 
 To get the elevation data from a list of lat long coordintes, follow the above instructions but instead of running the `npm start` command run `npm run point-depth -- fileName.csv` where `fileName.csv` is the name of the file to be read. In the point-depth.js there are hard coded configurations for which column your lat and long data is located in defaults to 0 and 1.
+
+The response includes the elevation at that point, in meters, along with the resolution value (the maximum distance between data points from which the elevation was interpolated, in meters).
