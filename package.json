@@ -8,12 +8,14 @@
     "url": "git+https://github.com/craigsidcarlson/google_map_line_builder.git"
   },
   "scripts": {
-    "start": "node google_map_builder.js"
+    "start": "node google_map_builder.js",
+    "point-depth": "node point-depth.js"
   },
   "author": "Craig and Roz",
   "license": "ISC",
   "dependencies": {
-    "axios": "^0.19.2",
+    "axios": "^0.21.1",
+    "bottleneck": "^2.19.5",
     "dotenv": "^8.2.0",
     "fs": "0.0.1-security",
     "geolib": "^3.3.1"
