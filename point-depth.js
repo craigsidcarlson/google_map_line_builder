@@ -22,7 +22,7 @@ const file_prefix = 'roz_data';
 
 const delimiter = ',';
 const lat_col = 1;
-const long_col = 3;
+const long_col = 2;
 
 ////////////////////////////////////////
 
@@ -63,35 +63,32 @@ readInterface.on('close', () => {
 	}
 
 	Promise.all(promises)
-	.then(results => {
-		const time = Date.now();
-		fs.writeFile(`data/${file_prefix}_${time}.csv`, results.flat().join('\n'), function (err) {
-			if (err) throw err;
-			console.log('Saved!');
+		.then(results => {
+			const time = Date.now();
+			fs.writeFile(`data/${file_prefix}_${time}.csv`, results.flat().join('\n'), function (err) {
+				if (err) throw err;
+				console.log('Saved!');
+			});
+		})
+		.catch(error => {
+			console.log(error);
 		});
-		
-	})
-	.catch(error => {
-		console.log(error);
-	});
 
 });
 
 const getPointElevation = (coordinates) => {
 	return new Promise((resolve,reject) => {
 		if(!coordinates || !coordinates.length) return reject(new Error('Missing either lat or long'));
-		console.log(coordinates)
 		let locationSearchString = '';
 		for (let i = 0; i < coordinates.length; i++) {
 			locationSearchString = locationSearchString.concat(`${coordinates[i].lat},${coordinates[i].long}`);
 			if (i !== coordinates.length -1 ) locationSearchString = locationSearchString.concat('|');
 		}
-		console.log(`locationSearchString: ${locationSearchString}`);
 		const url = `https://maps.googleapis.com/maps/api/elevation/json?locations=${locationSearchString}&key=${api_key}`;
 		limiter.schedule(() => axios.get(url))
 			.then(results => {
 				const commaSeperatedResponses = [];
-				for(let i = 0; i < results.length; i++) {
+				for (let i = 0; i < results.data.results.length; i++) {
 					const elevation = results.data.results[i].elevation;
 					const resolution = results.data.results[i].resolution;
 					const location = results.data.results[i].location;
@@ -104,20 +101,4 @@ const getPointElevation = (coordinates) => {
 				return reject(error);
 			})
 	});
-}
-
-function toDegrees(angle) {
-  return angle * (180 / Math.PI);
-}
-
-function toRadians (angle) {
-  return angle * (Math.PI / 180);
-}
-
-function cosine(angle) {
-	return toDegrees(Math.cos(toRadians(angle)));
-}
-
-function sine(angle) {
-	return toDegrees(Math.sin(toRadians(angle)));
 }
