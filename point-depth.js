@@ -21,8 +21,8 @@ if(!api_key) {
 const file_prefix = 'roz_data';
 
 const delimiter = ',';
-const lat_col = 1;
-const long_col = 2;
+const lat_col = 0;
+const long_col = 1;
 
 ////////////////////////////////////////
 
@@ -38,7 +38,7 @@ console.log(`Starting file stream read from ${file_name}`);
 const readInterface = readline.createInterface({
 	input: fs.createReadStream(file_name),
 	output: process.stdout,
-	console: false
+	terminal: false
 });
 
 // Note: we use the crlfDelay option to recognize all instances of CR LF
@@ -46,8 +46,8 @@ const readInterface = readline.createInterface({
 const coordinates = [];
 readInterface.on('line', (line) => {
 	const splitLine = line.split(delimiter);
-	const lat = splitLine[lat_col];
-	const long = splitLine[long_col];
+	const lat = splitLine[lat_col].trim();
+	const long = splitLine[long_col].trim();
 	coordinates.push({lat, long});
 });
 
@@ -84,9 +84,11 @@ const getPointElevation = (coordinates) => {
 			locationSearchString = locationSearchString.concat(`${coordinates[i].lat},${coordinates[i].long}`);
 			if (i !== coordinates.length -1 ) locationSearchString = locationSearchString.concat('|');
 		}
+		const encodedLocations = encodeURI(locationSearchString);
 		const url = `https://maps.googleapis.com/maps/api/elevation/json?locations=${locationSearchString}&key=${api_key}`;
 		limiter.schedule(() => axios.get(url))
 			.then(results => {
+				console.log(results);
 				const commaSeperatedResponses = [];
 				for (let i = 0; i < results.data.results.length; i++) {
 					const elevation = results.data.results[i].elevation;
